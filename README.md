@@ -20,3 +20,7 @@ When writing Selenium tests you use RemoteWebDriver in the same way as you would
 
 You can reconfigure some basics by modifying config/{environment}.js and then running the grid with
 `NODE_ENV={environment} node grid.js`
+
+## Known issues
+
+There is an issue using the TestLabs Grid with PhantomJS - unfortunately HTTP headers sent to GhostDriver are expected with a specific case - e.g. Content-Type as opposed to content-type. The frameworks we use with node.js send headers lowercased (which is correct as per the HTTP spec). We will be opening a pull request to fix this issue.
