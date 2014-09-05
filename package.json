@@ -1,0 +1,17 @@
+{
+  "name": "testlabs-grid",
+  "version": "0.1.0",
+  "private": false,
+  "scripts": {
+    "start": "node grid.js"
+  },
+  "dependencies": {
+    "connect-security": ">=0.5.2",
+    "express": ">=3.0.6",
+    "ejs": ">=0.8.3",
+    "ejs-locals": ">=1.0.2",
+    "less-middleware": ">=0.1.9",
+    "log4js": ">= 0.3.0",
+    "request": ">= 2.27.0"
+  }
+}

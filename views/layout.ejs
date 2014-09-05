@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>TestLabs Grid - <%- title -%></title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link href="/css/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="/css/site.css" rel="stylesheet" media="screen">
+    <%- stylesheets %>
+  </head>
+  <body>
+    <div class="container">
+      <div class="navbar navbar-default">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/admin">TestLabs Grid</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/admin">Home</a></li>
+            <li><a href="/admin/capabilities">Capabilities</a></li>
+            <li><a href="/admin/nodes">Nodes</a></li>
+            <li><a href="/admin/sessions">Sessions</a></li>
+          </ul>
+        </div>
+      </div>
+      <%- body -%>
+      <div id="footer">
+        <p>Brought to you by <a href="https://testlabs.io">TestLabs</a></p>
+      </div>
+    </div>
+    <script src="//code.jquery.com/jquery.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <%- scripts %>
+  </body>
+</html>

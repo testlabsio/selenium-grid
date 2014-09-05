@@ -1,0 +1,24 @@
+<% layout('../layout') -%>
+
+<div class="table-responsive">
+	<table class="table">
+		<thead>
+			<th>Platform</th>
+			<th>OS Version</th>
+			<th>Browser Name</th>
+			<th>Browser Version</th>
+			<th>Javscript Enabled</th>
+		</thead>
+		<tbody>
+			<% for (var i = 0; i < capabilities.length; i++) { %>
+				<tr>
+					<td><%= capabilities[i].platform %></td>
+					<td><%= capabilities[i].osVersion %></td>
+					<td><%= capabilities[i].browserName %></td>
+					<td><%= capabilities[i].version ? capabilities[i].version : 'ANY' %></td>
+					<td><%= capabilities[i].javascriptEnabled ? capabilities[i].javascriptEnabled : 'ANY' %></td>
+				</tr>
+			<% } %>
+		</tbody>
+	</table>
+</div>

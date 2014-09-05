@@ -1,0 +1,27 @@
+<% layout('../layout') -%>
+
+<form method="post">
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <th>ID</th>
+        <th>Key</th>
+        <th>Last Updated</th>
+        <th>State</th>
+        <th>Error</th>
+        </thead>
+      <tbody>
+        <% for (var i = 0; i < nodes.length; i++) { %>
+          <tr>
+            <td><%= nodes[i].id %></td>
+            <td><input name="<%= nodes[i].id %>" value="<%= nodes[i].key %>"></td>
+            <td><%= nodes[i].lastUpdated %></td>
+            <td><%= nodes[i]._state %></td>
+            <td><%= nodes[i].error %></td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+  <button type="submit">Update</button>
+</form>

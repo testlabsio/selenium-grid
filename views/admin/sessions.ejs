@@ -1,0 +1,22 @@
+<% layout('../layout') -%>
+
+<div class="table-responsive">
+	<table class="table">
+		<thead>
+			<th>ID</th>
+			<th>Node</th>
+			<th>Capabilities</th>
+			<th>Last Updated</th>
+		</thead>
+		<tbody>
+			<% for (var i = 0; i < sessions.length; i++) { %>
+				<tr>
+					<td><%= sessions[i].id %></td>
+					<td><%= sessions[i].node.id %></td>
+					<td></td>
+					<td><%= sessions[i].lastUpdated %></td>
+				</tr>
+			<% } %>
+		</tbody>
+	</table>
+</div>
