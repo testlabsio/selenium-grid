@@ -24,3 +24,28 @@ You can reconfigure some basics by modifying config/{environment}.js and then ru
 ## Known issues
 
 There is an issue using the TestLabs Grid with PhantomJS - unfortunately HTTP headers sent to GhostDriver are expected with a specific case - e.g. Content-Type as opposed to content-type. The frameworks we use with node.js send headers lowercased (which is correct as per the HTTP spec). We will be opening a pull request to fix this issue.
+
+## License 
+
+(The MIT License)
+
+Copyright (c) 2014 TestLabs.io &lt;hi@testlabs.io&gt;
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+'Software'), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
