@@ -50,7 +50,7 @@ if (app.get('users')) {
 }
 
 // all requests to /wd/hub/* should be proxied through to a node.
-app.use('/wd/hub', createNodeProxy(app.get('host'), app.get('nodeStore'), app.get('sessionStore')));
+app.use(createNodeProxy(app.get('host'), app.get('nodeStore'), app.get('sessionStore')));
 
 // set correct content-type on register requests
 app.use(function(req, res, next) {
