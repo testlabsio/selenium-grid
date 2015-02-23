@@ -19,7 +19,7 @@ function registerNode(req, res) {
     LOGGER.debug('registerNode');
     var node = new Node(req.body);
     nodeStore.addNode(node);
-    res.send(200, 'ok');
+    res.status(200).send('ok');
 }
 
 function retrieveHubStatus(req, res) {
@@ -47,7 +47,7 @@ function retrieveNodeStatus(req, res) {
             });
         }
     } else {
-        res.send(400, 'No id specified.');
+        res.status(400).send('No id specified.');
     }
 }
 
@@ -72,6 +72,6 @@ function retrieveTestSessionStatus(req, res) {
             });
         }
     } else {
-        res.send(400, 'No session specified.');
+        res.status(400).send('No session specified.');
     }
 }

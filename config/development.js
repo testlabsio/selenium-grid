@@ -6,11 +6,10 @@ var InMemoryNodeStore = require('../repository/inmemorynodestore')
   , log4js = require('log4js')
   ;
 
-function setup(app, express) {
+function setup(app) {
 
     log4js.setGlobalLogLevel('DEBUG');
 
-    app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
     app.use(log4js.connectLogger(log4js.getLogger('express.js')));
 
     var nodeStore = new InMemoryNodeStore();
@@ -23,23 +22,24 @@ function setup(app, express) {
     app.set('sessionStore', new InMemorySessionStore());
     app.set('host', 'http://localhost:3000');
 
-    app.set('users', {
-        'framework': {
-            username : 'framework',
-            password : 'password',
-            roles : [ 'user' ]
-        },
-        'node': {
-            username : 'node',
-            password : 'password',
-            roles : [ 'user' ]
-        },
-        'admin': {
-            username : 'admin',
-            password : 'password',
-            roles : [ 'admin' ]
-        }
-    })
+    // To enable BASIC auth uncomment and configure your users.
+//    app.set('users', {
+//        'framework': {
+//            username : 'framework',
+//            password : 'password',
+//            roles : [ 'user' ]
+//        },
+//        'node': {
+//            username : 'node',
+//            password : 'password',
+//            roles : [ 'user' ]
+//        },
+//        'admin': {
+//            username : 'admin',
+//            password : 'password',
+//            roles : [ 'admin' ]
+//        }
+//    });
 }
 
-module.exports = exports = setup;
+module.exports = setup;

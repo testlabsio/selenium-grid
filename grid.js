@@ -1,13 +1,10 @@
 
 var express = require('express')
-  , routes = require('./routes')
-  , http = require('http')
   , path = require('path')
-  , createNodeProxy = require('./routes/nodeproxy')
-  , setup = require('./config/setup.js')
-  , less = require('less-middleware')
-  , routes = require('./routes')
   , security = require('connect-security')
+  , createNodeProxy = require('./routes/nodeproxy')
+  , config = require('./config')
+  , routes = require('./routes')
   ;
 
 var InMemoryUserProvider = require('connect-security/lib/service/inmemoryuserprovider')
@@ -17,20 +14,21 @@ var InMemoryUserProvider = require('connect-security/lib/service/inmemoryuserpro
 
 var app = express();
 
-setup(app, express);
+config(app);
 
-app.configure(function(){
-  app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3000);
 
-  app.engine('ejs', require('ejs-locals'));
-  app.set('views', __dirname + '/views');
-  app.set('view engine', 'ejs');
+app.engine('ejs', require('ejs-locals'));
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
 
-  app.use(express.favicon());
+app.use(require('express-session')({
+  resave: true,
+  saveUninitialized: true,
+  secret: 'jdHU82*sH3!!laD'
+}));
 
-  app.use(express.cookieParser());
-  app.use(express.cookieSession({ key: 'testlabs-grid', secret: 'jdHU82*sH3!!laD' }));
-
+if (app.get('users')) {
   app.use(security({
     interceptUrls: [
       { url: /^\/(css|img|js)/, access: 'isAuthenticated()' },
@@ -48,28 +46,33 @@ app.configure(function(){
     entryPoint: new BasicAuthenticationEntryPoint({
       realmName: 'TestLabs Grid'
     })
-  }))
+  }));
+}
 
-  // all requests to /wd/hub/* should be proxied through to a node.
-  app.use(createNodeProxy(app.get('host'), app.get('nodeStore'), app.get('sessionStore')));
+// all requests to /wd/hub/* should be proxied through to a node.
+app.use('/wd/hub', createNodeProxy(app.get('host'), app.get('nodeStore'), app.get('sessionStore')));
 
-  // set correct content-type on register requests
-  app.use(function(req, res, next) {
-    if (req.method == 'POST' && /\/grid\/register/.test(req.path)) {
-      req.headers['content-type'] = 'application/json';
-    }
-    next();
-  });
-
-  app.use(express.bodyParser());
-  app.use(app.router);
-  app.use(less({ src: path.join(__dirname, 'public') }));
-  app.use(express.static(path.join(__dirname, 'public')));
-  app.use(security.errorHandler());
+// set correct content-type on register requests
+app.use(function(req, res, next) {
+  if (req.method === 'POST' && /\/grid\/register/.test(req.path)) {
+    req.headers['content-type'] = 'application/json';
+  }
+  next();
 });
+
+app.use(require('less-middleware')(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(require('body-parser').urlencoded({ extended: true }));
+app.use(require('body-parser').json());
 
 routes(app);
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log("TestLabs Grid listening on port " + app.get('port'));
+if (app.get('users')) {
+  app.use(security.errorHandler());
+}
+
+var server = app.listen(app.get('port'), function () {
+  var host = server.address().address;
+  var port = server.address().port;
+  console.log('TestLabs Grid listening at http://%s:%s', host, port);
 });

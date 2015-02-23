@@ -10,7 +10,7 @@ var host
   ;
 
 function createNodeProxy(newHost, newNodeStore, newSessionStore) {
-  host = newHost
+  host = newHost;
   nodeStore = newNodeStore;
   sessionStore = newSessionStore;
 
